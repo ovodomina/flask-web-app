@@ -1,0 +1,38 @@
+name: Python Flask CI
+
+on:
+  push:
+    branches: 
+      - main
+  pull_request:
+    branches: 
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+      
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      
+      - name: Run Tests
+        run: |
+          pytest test_app.py
+      
+      - name: Compile Application (Optional)
+        run: |
+          echo "Compilando a aplicação..."
+          # Aqui você pode adicionar comandos que você gostaria de executar para 'compilar' sua aplicação.
+          # Para aplicações Python, geralmente não há uma compilação no sentido tradicional,
+          # mas você pode realizar verificações ou gerar artefatos se necessário.
