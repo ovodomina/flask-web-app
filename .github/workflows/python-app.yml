@@ -14,29 +14,22 @@ jobs:
     
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2
-      
+        uses: actions/checkout@v3  # Atualizado para a versão mais recente
+        
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4  # Atualizado para a versão mais recente
         with:
           python-version: '3.8'
-      
+        
       - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install wheel
           pip install -r requirements.txt
-      
-      - name: Build Distribution
-        run: |
-          python setup.py sdist bdist_wheel
-      
+        
       - name: Run Tests
         run: |
           pytest test_app.py
-
-      - name: Upload Build Artifacts
-        uses: actions/upload-artifact@v2
-        with:
-          name: flask-app-dist
-          path: dist/
+        
+      - name: Build Application
+        run: |
+          python setup.py sdist bdist_wheel
