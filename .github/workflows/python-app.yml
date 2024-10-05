@@ -11,13 +11,13 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v3  # Atualizado para a versão mais recente
+        uses: actions/checkout@v3  # Utiliza a versão mais recente do checkout
         
       - name: Set up Python
-        uses: actions/setup-python@v4  # Atualizado para a versão mais recente
+        uses: actions/setup-python@v4  # Utiliza a versão mais recente do setup-python
         with:
           python-version: '3.8'
         
@@ -29,7 +29,13 @@ jobs:
       - name: Run Tests
         run: |
           pytest test_app.py
-        
+
       - name: Build Application
         run: |
           python setup.py sdist bdist_wheel
+          
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v3  # Atualiza para a versão mais recente
+        with:
+          name: dist
+          path: dist/*
