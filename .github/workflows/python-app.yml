@@ -2,10 +2,10 @@ name: Python Flask CI
 
 on:
   push:
-    branches:
+    branches: 
       - main
   pull_request:
-    branches:
+    branches: 
       - main
 
 jobs:
@@ -15,22 +15,22 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
-
+      
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
           python-version: '3.8'
-
+      
       - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
+          pip install wheel  # Instala o wheel explicitamente
           pip install -r requirements.txt
-
-      - name: Run Tests
-        run: |
-          pytest
-
-      - name: Build Package
+      
+      - name: Build Distribution
         run: |
           python setup.py sdist bdist_wheel
-          ls -l dist/
+      
+      - name: Run Tests
+        run: |
+          pytest test_app.py
