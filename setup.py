@@ -2,15 +2,20 @@ from setuptools import setup, find_packages
 
 setup(
     name='flask-web-app',
-    version='0.1',
+    version='1.0.0',
+    description='A simple Flask web application',
+    author='Seu Nome',
+    author_email='seuemail@example.com',
     packages=find_packages(),
     include_package_data=True,
     install_requires=[
-        'Flask',
+        'Flask==3.0.3',
+        'Werkzeug==3.0.4',
     ],
-    entry_points={
-        'console_scripts': [
-            'flask-web-app = app:app.run',
-        ],
-    },
+    classifiers=[
+        'Programming Language :: Python :: 3',
+        'License :: OSI Approved :: MIT License',
+        'Operating System :: OS Independent',
+    ],
+    python_requires='>=3.6',
 )
